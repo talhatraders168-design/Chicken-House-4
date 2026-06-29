@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicken House</title>
 
+<style>
+body{font-family:Arial;margin:0;background:#fff7e6}
+header{background:#d32f2f;color:white;padding:15px;text-align:center}
+.container{padding:15px}
+.card{background:white;padding:15px;margin:10px 0;border-radius:10px}
+button{padding:8px 12px;cursor:pointer}
+.cart{background:#222;color:white;padding:10px;border-radius:10px}
+input,textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ccc}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>🐔 Chicken House</h1>
+<p>Fresh & Tasty Chicken Food</p>
+</header>
+
+<div class="container">
+
+<!-- PRODUCTS -->
+<div class="card">
+<h3>Grilled Chicken - $5</h3>
+<button onclick="add('Grilled Chicken',5)">Add</button>
+</div>
+
+<div class="card">
+<h3>Fried Chicken - $4</h3>
+<button onclick="add('Fried Chicken',4)">Add</button>
+</div>
+
+<div class="card">
+<h3>Chicken Burger - $3</h3>
+<button onclick="add('Chicken Burger',3)">Add</button>
+</div>
+
+<!-- CHECKOUT -->
+<div class="card">
+<h3>Checkout</h3>
+
+<input id="name" placeholder="Your Name">
+<textarea id="address" placeholder="Your Address"></textarea>
+<input id="phone" placeholder="Phone Number">
+
+</div>
+
+<!-- CART -->
+<div class="cart">
+<h3>Cart</h3>
+<ul id="cart"></ul>
+<p>Total: $<span id="total">0</span></p>
+
+<button onclick="order()">Place Order</button>
+</div>
+
+</div>
+
+<script>
+
+let cart = [];
+let total = 0;
+
+function add(item, price){
+cart.push(item + " - $" + price);
+total += price;
+document.getElementById("cart").innerHTML =
+cart.map(i => "<li>"+i+"</li>").join("");
+document.getElementById("total").innerText = total;
+}
+
+function order(){
+
+let name = document.getElementById("name").value;
+let address = document.getElementById("address").value;
+let phone = document.getElementById("phone").value;
+
+if(!name || !address || !phone){
+alert("Please fill all fields");
+return;
+}
+
+if(cart.length === 0){
+alert("Cart is empty");
+return;
+}
+
+let msg =
+"Chicken House Order\n\n" +
+"Name: " + name + "\n" +
+"Phone: " + phone + "\n" +
+"Address: " + address + "\n\n" +
+"Items:\n" + cart.join("\n") + "\n\n" +
+"Total: $" + total;
+
+let url = "https://wa.me/8801XXXXXXXXX?text=" + encodeURIComponent(msg);
+
+window.open(url,"_blank");
+
+}
+
+</script>
+
+</body>
+</html>
