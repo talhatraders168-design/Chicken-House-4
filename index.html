@@ -83,7 +83,7 @@ document.getElementById("total").innerText = total;
 /* ORDER FUNCTION (FIXED) */
 function orderNow(){
 
-let shopNumber = "88017XXXXXXX"; // 👉 এখানে তোমার WhatsApp নাম্বার বসাও
+let shopNumber = "8801817466008"; // 👉 এখানে তোমার WhatsApp নাম্বার বসাও
 
 let name = document.getElementById("name").value;
 let address = document.getElementById("address").value;
@@ -116,52 +116,6 @@ window.open(url, "_blank");
 }
 
 </script>
-let cart = [];
-let total = 0;
 
-function addItem(item, price){
-cart.push(item + " - $" + price);
-total += price;
-
-document.getElementById("cart").innerHTML =
-cart.map(i => "<li>" + i + "</li>").join("");
-
-document.getElementById("total").innerText = total;
-}
-
-function orderNow(){
-
-let shopNumber = "88017XXXXXXX"; // তোমার নাম্বার দাও
-
-let name = document.getElementById("name").value;
-let address = document.getElementById("address").value;
-let phone = document.getElementById("phone").value;
-
-if(!name || !address || !phone){
-alert("Fill all fields");
-return;
-}
-
-if(cart.length === 0){
-alert("Cart empty");
-return;
-}
-
-let msg =
-"Chicken House Order\n\n" +
-"Name: " + name + "\n" +
-"Phone: " + phone + "\n" +
-"Address: " + address + "\n\n" +
-"Items:\n" + cart.join("\n") + "\n\n" +
-"Total: $" + total;
-
-let url = "https://wa.me/" + shopNumber + "?text=" + encodeURIComponent(msg);
-
-console.log(url); // debug check
-window.open(url, "_blank");
-
-}
-
-</script>
 </body>
 </html>
