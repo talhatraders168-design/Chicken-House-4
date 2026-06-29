@@ -12,9 +12,10 @@ header{background:#d32f2f;color:white;padding:15px;text-align:center}
 .card{background:white;padding:15px;margin:10px 0;border-radius:10px}
 button{padding:8px 12px;cursor:pointer}
 .cart{background:#222;color:white;padding:10px;border-radius:10px}
-input,textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ccc}
+input,textarea{
+width:100%;padding:8px;margin:5px 0;border:1px solid #ccc;border-radius:5px;
+}
 </style>
-
 </head>
 
 <body>
@@ -29,17 +30,17 @@ input,textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ccc}
 <!-- PRODUCTS -->
 <div class="card">
 <h3>Grilled Chicken - $5</h3>
-<button onclick="add('Grilled Chicken',5)">Add</button>
+<button onclick="addItem('Grilled Chicken',5)">Add</button>
 </div>
 
 <div class="card">
 <h3>Fried Chicken - $4</h3>
-<button onclick="add('Fried Chicken',4)">Add</button>
+<button onclick="addItem('Fried Chicken',4)">Add</button>
 </div>
 
 <div class="card">
 <h3>Chicken Burger - $3</h3>
-<button onclick="add('Chicken Burger',3)">Add</button>
+<button onclick="addItem('Chicken Burger',3)">Add</button>
 </div>
 
 <!-- CHECKOUT -->
@@ -58,7 +59,7 @@ input,textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ccc}
 <ul id="cart"></ul>
 <p>Total: $<span id="total">0</span></p>
 
-<button onclick="order()">Place Order</button>
+<button onclick="orderNow()">📱 Place Order</button>
 </div>
 
 </div>
@@ -68,25 +69,27 @@ input,textarea{width:100%;padding:8px;margin:5px 0;border:1px solid #ccc}
 let cart = [];
 let total = 0;
 
-function add(item, price){
+/* ADD ITEMS */
+function addItem(item, price){
 cart.push(item + " - $" + price);
 total += price;
+
 document.getElementById("cart").innerHTML =
-cart.map(i => "<li>"+i+"</li>").join("");
+cart.map(i => "<li>" + i + "</li>").join("");
+
 document.getElementById("total").innerText = total;
 }
 
-function order(){
-let shopNumber = "88017XXXXXXX";
-function order(){
+/* ORDER FUNCTION (FIXED) */
+function orderNow(){
 
-let shopNumber = "88017XXXXXXX"; // ADD THIS LINE
-let url = "https://wa.me/" + shopNumber + "?text=" + encodeURIComponent(msg);
-window.open(url, "_blank");
+let shopNumber = "88017XXXXXXX"; // 👉 এখানে তোমার WhatsApp নাম্বার বসাও
+
 let name = document.getElementById("name").value;
 let address = document.getElementById("address").value;
 let phone = document.getElementById("phone").value;
 
+/* validation */
 if(!name || !address || !phone){
 alert("Please fill all fields");
 return;
@@ -97,18 +100,19 @@ alert("Cart is empty");
 return;
 }
 
+/* message */
 let msg =
-"Chicken House Order\n\n" +
+"🐔 Chicken House Order\n\n" +
 "Name: " + name + "\n" +
 "Phone: " + phone + "\n" +
 "Address: " + address + "\n\n" +
 "Items:\n" + cart.join("\n") + "\n\n" +
 "Total: $" + total;
 
-let url = "https://wa.me/8801817866008text=" + encodeURIComponent(msg);
+/* open whatsapp */
+let url = "https://wa.me/" + shopNumber + "?text=" + encodeURIComponent(msg);
 
-window.open(url,"_blank");
-
+window.open(url, "_blank");
 }
 
 </script>
