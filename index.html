@@ -77,7 +77,12 @@ document.getElementById("total").innerText = total;
 }
 
 function order(){
+let shopNumber = "88017XXXXXXX";
+function order(){
 
+let shopNumber = "88017XXXXXXX"; // ADD THIS LINE
+let url = "https://wa.me/" + shopNumber + "?text=" + encodeURIComponent(msg);
+window.open(url, "_blank");
 let name = document.getElementById("name").value;
 let address = document.getElementById("address").value;
 let phone = document.getElementById("phone").value;
